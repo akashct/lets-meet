@@ -44,7 +44,7 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="desc_firebase_lockup">Firebase logo and name</string>
-    <string name="auth_failed">Authentication failed</string>
+    <string name="auth_failed">Authentication failed, Please enter valid Email/Password</string>
     <string name="start_phone_auth">Start</string>
     <string name="verify_phone_auth">Verify</string>
     <string name="resend_phone_auth">Resend</string>
@@ -84,4 +84,8 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
+
+    <string name="string_password">Password</string>
+    <string name="sign_up_title">Create your Let\'s Meet account</string>
+    <string name="forgot_password_title">Reset password of your Let\'s Meet Account</string>
 </resources>

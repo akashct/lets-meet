@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "47036547196-jr53fbqmkc2smbjdfdouekhosaht5p21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.letsmeet",
+            "certificate_hash": "078372efbadf43507cd88f1bcee89bab22a15e61"
+          }
+        },
+        {
           "client_id": "47036547196-ls2lvb79evg8bshr1p22s9ndn16vohdk.apps.googleusercontent.com",
           "client_type": 3
         }
