@@ -48,8 +48,6 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        //showProgressDialog();
-
         mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -112,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
     public void handleSignuptoLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

@@ -4,7 +4,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splashbg"
+    android:background="@drawable/gradient"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +16,21 @@
         android:layout_weight="1"
         android:gravity="center_horizontal"
         android:text="Welcome, Thank you for choosing us!"
-        android:textColor="@android:color/primary_text_light"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:theme="@style/ThemeOverlay.MyTitleText" />
+
+    <TextView
+        android:id="@+id/logoText"
+        android:layout_width="match_parent"
+        android:layout_height="625dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="@dimen/title_bottom_margin"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="Lets's Meet"
+        android:textColor="@color/colorAccent"
         android:textSize="30sp"
         android:textStyle="bold"
         android:theme="@style/ThemeOverlay.MyTitleText" />
@@ -26,7 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginEnd="20px"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="50dp"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
