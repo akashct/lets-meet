@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private static final String TAG = "EmailPassword";
 
+    private FirebaseAuth mAuth;
+
 //    private FirebaseAuth mAuth;
     private Button login;
     private Button signup;
@@ -30,22 +32,18 @@ public class MainActivity extends AppCompatActivity  {
         signup = (Button)findViewById(R.id.emailCreateAccountButton);
 
         //FirebaseApp.initializeApp(this);
-
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser!=null) {
-//            updateUI(currentUser);
-//        }
     }
 
     public void userLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void userSignUp(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
+        finish();
     }
 
  //   @Override

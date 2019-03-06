@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
 
+
     EditText fname;
     EditText lname;
     EditText email;
@@ -79,6 +80,7 @@ public class SignupActivity extends AppCompatActivity {
         if (user != null) {
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
+            finish();
         } else {
             email.setText("");
             password.setText("");
@@ -112,31 +114,4 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void sendEmailVerification() {
-//        // Disable button
-//        findViewById(R.id.verifyEmailButton).setEnabled(false);
-//
-//        // Send verification email
-//        final FirebaseUser user = mAuth.getCurrentUser();
-//        user.sendEmailVerification()
-//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        // Re-enable button
-//                        findViewById(R.id.verifyEmailButton).setEnabled(true);
-//
-//                        if (task.isSuccessful()) {
-//                            Toast.makeText(MainActivity.this,
-//                                    "Verification email sent to " + user.getEmail(),
-//                                    Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Log.e(TAG, "sendEmailVerification", task.getException());
-//                            Toast.makeText(MainActivity.this,
-//                                    "Failed to send verification email.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//
-//    }
 }

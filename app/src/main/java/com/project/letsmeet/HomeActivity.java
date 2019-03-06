@@ -1,7 +1,9 @@
 package com.project.letsmeet;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,20 +20,41 @@ public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+//    HomeActivity() {
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        System.out.print("Current user: "+currentUser);
+//        if(currentUser==null) {
+//            Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+//            startActivity(intent);
+//        }
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
+        if(!loggedIn()) {
+            Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        mAuth = FirebaseAuth.getInstance();
     }
 
     public void handleSignout(View view) {
         mAuth.signOut();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
     protected void onStart() {
+        if(!loggedIn()) {
+            Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
         super.onStart();
         FirebaseApp.initializeApp(this);
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -69,4 +92,15 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public boolean loggedIn() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        System.out.print("Current user: "+currentUser);
+        if(currentUser==null) {
+            return false;
+        }
+        return true;
+    }
+
 }
