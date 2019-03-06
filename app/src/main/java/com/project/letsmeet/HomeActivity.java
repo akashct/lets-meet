@@ -20,16 +20,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-//    HomeActivity() {
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        System.out.print("Current user: "+currentUser);
-//        if(currentUser==null) {
-//            Intent intent = new Intent(HomeActivity.this,MainActivity.class);
-//            startActivity(intent);
-//        }
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseApp.initializeApp(this);
@@ -41,6 +31,10 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser.isEmailVerified()) {
+            findViewById(R.id.email_verify_button).setVisibility(View.INVISIBLE);
+        }
     }
 
     public void handleSignout(View view) {
@@ -58,10 +52,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
         FirebaseApp.initializeApp(this);
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser.isEmailVerified()) {
-            findViewById(R.id.email_verify_button).setVisibility(View.INVISIBLE);
-        }
     }
 
 
