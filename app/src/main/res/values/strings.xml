@@ -88,4 +88,7 @@
     <string name="string_password">Password</string>
     <string name="sign_up_title">Create your Let\'s Meet account</string>
     <string name="forgot_password_title">Reset password of your Let\'s Meet Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
