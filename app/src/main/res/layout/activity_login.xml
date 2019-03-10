@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/login_Applogo"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         app:srcCompat="@drawable/logo" />
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/forgot_password"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bottons"

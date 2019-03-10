@@ -46,4 +46,11 @@
         <item name="android:textSize">36sp</item>
     </style>
 
+    <style name="MyAppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#ff6d00</item>
+        <item name="colorControlActivated">#33691e</item>
+        <item name="android:selectableItemBackgroundBorderless">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">#d50000</item>
+    </style>
+
 </resources>

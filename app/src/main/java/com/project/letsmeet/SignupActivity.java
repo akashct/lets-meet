@@ -1,8 +1,6 @@
 package com.project.letsmeet;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +14,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText email;
     EditText password;
     private FirebaseAuth mAuth;
+    private DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.sign_up_password_input);
 
         mAuth = FirebaseAuth.getInstance();
+        rootRef = FirebaseDatabase.getInstance().getReference();
 
     }
 
@@ -55,9 +60,12 @@ public class SignupActivity extends AppCompatActivity {
                         Log.d("SignUpValidation", "createAccount:" + email.getText().toString());
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            User user = getFields();
+                            String currentUserId = mAuth.getCurrentUser().getUid();
+                            rootRef.child("Users").child(currentUserId).setValue(user);
                             Log.d("SignUp", "createUserWithEmail:s uccess");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            updateUI(currentUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.e("SignUp", "createUserWithEmail:failure", task.getException());
@@ -65,7 +73,6 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
-                        //hideProgressDialog();
 
                     }
                 });
@@ -111,6 +118,17 @@ public class SignupActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private User getFields(){
+        String firstName = fname.getText().toString();
+        String lastName = lname.getText().toString();
+        String mail = email.getText().toString();
+        String pass = password.getText().toString();
+        String image = "NO_IMAGE";
+
+        User user = new User(firstName, lastName, mail, pass, image);
+        return user;
     }
 
 }
