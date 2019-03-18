@@ -50,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private StorageReference userProfileImageRef;
     private String currentUserId;
     private ProgressDialog loadingBar;
+    private Button signout;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,6 +74,15 @@ public class ProfileFragment extends Fragment {
                 openFileChooser();
             }
         });
+        signout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
         return  profileFragmentView;
     }
 
@@ -82,6 +92,7 @@ public class ProfileFragment extends Fragment {
         email = (TextView) profileFragmentView.findViewById(R.id.set_email);
         profilePic = (CircleImageView) profileFragmentView.findViewById(R.id.set_profile_image);
         loadingBar = new ProgressDialog(getActivity());
+        signout = (Button) profileFragmentView.findViewById(R.id.btnsignout);
     }
 
     @Override

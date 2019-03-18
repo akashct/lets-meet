@@ -38,6 +38,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/particips_listview_findUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/input_design"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
@@ -82,7 +98,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@android:color/transparent"
-            android:dividerHeight="10.0sp"></ListView>
+            android:dividerHeight="10.0sp"
+            android:background="@drawable/list_item_drawable"
+            android:layout_marginTop="15dp"></ListView>
     </LinearLayout>
 
 </LinearLayout>

@@ -35,7 +35,7 @@ public class TabsAccessorAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch(position){
-            case 0: return "Upcoming Events";
+            case 0: return "My Events";
             case 1: return "Add Event";
             case 2: return "Profile";
             default:

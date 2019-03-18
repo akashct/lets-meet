@@ -1,12 +1,13 @@
 package com.project.letsmeet;
 
 import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,9 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -49,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
         Log.d("SignUp", "createAccount:" + email.getText().toString());
         if (!validateForm()) {
             Toast.makeText(this,"Error",Toast.LENGTH_LONG).show();
-        Log.d("SignUperror", "createAccount:" + email.getText().toString());
+            Log.d("SignUperror", "createAccount:" + email.getText().toString());
             return;
         }
 
@@ -63,7 +66,8 @@ public class SignupActivity extends AppCompatActivity {
                             User user = getFields();
                             String currentUserId = mAuth.getCurrentUser().getUid();
                             rootRef.child("Users").child(currentUserId).setValue(user);
-                            Log.d("SignUp", "createUserWithEmail:s uccess");
+                            getToken();
+                            Log.d("SignUp", "createUserWithEmail success");
                             FirebaseUser currentUser = mAuth.getCurrentUser();
                             updateUI(currentUser);
                         } else {
@@ -81,9 +85,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        //hideProgressDialog();
         if (user != null) {
             Intent intent = new Intent(this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         } else {
@@ -126,9 +130,27 @@ public class SignupActivity extends AppCompatActivity {
         String mail = email.getText().toString();
         String pass = password.getText().toString();
         String image = "NO_IMAGE";
-
         User user = new User(firstName, lastName, mail, pass, image);
         return user;
+    }
+
+    public void getToken(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                            String token = task.getResult().getToken();
+                            saveToken(token);
+                        } else {
+
+                        }
+                    }
+                });
+    }
+    private void saveToken(String token) {
+        String currentUserId = mAuth.getCurrentUser().getUid();
+        rootRef.child("Users").child(currentUserId).child("token").setValue(token);
     }
 
 }

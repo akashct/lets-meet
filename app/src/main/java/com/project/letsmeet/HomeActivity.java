@@ -1,7 +1,10 @@
 package com.project.letsmeet;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +30,10 @@ public class HomeActivity extends AppCompatActivity {
     private TabLayout mytabLayout;
     private TabsAccessorAdapter myTabsAccessorAdapter;
 
+    public static final String CHANNEL_ID = "lets_meet";
+    private static final String CHANNEL_NAME = "Lets Meet";
+    private static final String CHANNEL_DESC = "Lets Meet Notifications";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseApp.initializeApp(this);
@@ -40,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         mToolbar = (Toolbar) findViewById(R.id.home_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Leet's Meet");
+        getSupportActionBar().setTitle("Let's Meet");
         myViewPager = (ViewPager) findViewById(R.id.home_tabs_pager);
         myTabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myTabsAccessorAdapter);
@@ -48,6 +55,18 @@ public class HomeActivity extends AppCompatActivity {
 
         mytabLayout = (TabLayout) findViewById(R.id.home_tabs);
         mytabLayout.setupWithViewPager(myViewPager);
+        setUpNotification();
+        if(getIntent().getExtras() != null){
+            String event = getIntent().getExtras().getString("eventId");
+            String reg = getIntent().getExtras().getString("regId");
+            Intent intent = new Intent(this, DisplayNotification.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("eventId", event);
+            bundle.putString("regId", reg);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
 
 
 
@@ -126,6 +145,14 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    public void setUpNotification(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(CHANNEL_DESC);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
     }
 
 }

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/all_users_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:id="@+id/main_event_display"
     android:background="@color/colorPrimaryDark">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/all_users_profile_image"
-        android:layout_width="85dp"
+    <TextView
+        android:id="@+id/event_start_date"
+        android:layout_width="100dp"
         android:layout_height="85dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Date"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/profile_image" />
+        android:textColor="@android:color/background_light"
+       />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,20 +25,32 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/all_users_name"
+            android:id="@+id/event_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="user full name"
+            android:text="Event title"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_light"
+            android:layout_marginTop="5dp"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/all_users_email"
+            android:id="@+id/event_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="user email"
+            android:text="Description"
+            android:textAlignment="textStart"
+            android:textColor="@android:color/background_light"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/event_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="creator"
             android:textAlignment="textStart"
             android:textColor="@android:color/background_light"
             android:textSize="16sp"

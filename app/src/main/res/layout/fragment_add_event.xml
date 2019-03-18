@@ -14,62 +14,61 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/eventPageTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/eventPageTitle"
-            android:textSize="24dp"
+            android:layout_gravity="center_horizontal"
             android:text="Help us with meeting details!"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal" />
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/txtEventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="50dp"
             android:background="@drawable/input_design"
-            android:padding="10dp"
-            android:hint="Event Title"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
             android:ellipsize="start"
+            android:gravity="center"
+            android:hint="Event Title"
+            android:padding="10dp"
+            android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textCursorDrawable="@color/white"/>
+            android:textCursorDrawable="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-           >
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/txtEventDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/input_design"
-                android:hint="Event Description"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:gravity="center"
                 android:ellipsize="start"
+                android:gravity="center"
+                android:hint="Event Description"
+                android:padding="10dp"
+                android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textCursorDrawable="@color/white"
-                android:padding="10dp"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -82,25 +81,25 @@
                 android:id="@+id/btnStartDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bottons"
-                android:text="START DATE"
-                android:textSize="15sp"
-                android:textColor="@color/white"
                 android:ellipsize="start"
-                android:layout_marginRight="5dp"/>
+                android:text="START DATE"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btnEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bottons"
-                android:text="End Date"
-                android:textSize="15sp"
-                android:textColor="@color/white"
                 android:ellipsize="start"
-                android:layout_marginLeft="5dp"/>
+                android:text="End Date"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -113,12 +112,12 @@
                 android:id="@+id/txtLocation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bottons"
-                android:text="Add Location"
                 android:layout_weight="9.5"
-                android:textSize="15sp"
+                android:background="@drawable/bottons"
+                android:ellipsize="start"
+                android:text="Add Location"
                 android:textColor="@color/white"
-                android:ellipsize="start" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,12 +132,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/bottons"
                 android:clickable="true"
-                android:text="+"
-                android:textSize="20sp"
-                android:textColor="@color/white"
                 android:ellipsize="start"
-                android:background="@drawable/bottons"/>
+                android:text="Add Participants +"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="120dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<ListView-->
+                <!--android:id="@+id/particips_listview"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/input_design"-->
+                <!--android:layout_weight="1"/>-->
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/particips_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/input_design"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <Button
@@ -150,8 +181,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:background="@drawable/bottons"
-            android:text="Save"
-            android:textColor="@color/white"/>
+            android:text="Add"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

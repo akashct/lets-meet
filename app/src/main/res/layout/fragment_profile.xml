@@ -63,6 +63,19 @@
         android:textColorHint="@color/white"
         />
 
+    <Button
+        android:id="@+id/btnsignout"
+        android:layout_below="@+id/set_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bottons"
+        android:text="Sign out"
+        android:textColor="@color/white"/>
+
+
 
 
 </RelativeLayout>

@@ -1,5 +1,8 @@
 package com.project.letsmeet;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -19,24 +22,32 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LatLng latLng;
     Button search, ok;
+    Address address;
+    EditText location_tf;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        mToolbar = (Toolbar) findViewById(R.id.map_tool_bar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Let's Meet");
         search = (Button)findViewById(R.id.BSearch);
         ok = (Button)findViewById(R.id.locationOK);
+        location_tf = (EditText) findViewById(R.id.TFaddress);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -44,8 +55,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText location_tf = (EditText) findViewById(R.id.TFaddress);
                 String location = location_tf.getText().toString();
+                if(location_tf == null || location == null || location.equals("")) {
+                    return;
+                }
                 List<Address> addressList = null;
                 if (location != null || !location.equals("")) {
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
@@ -56,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                     if(addressList.size()>=1) {
-                        Address address = addressList.get(addressList.size()-1);
+                        address = addressList.get(addressList.size()-1);
                         latLng = new LatLng(address.getLatitude(), address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -67,13 +80,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         ok.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
+                location_tf = (EditText) findViewById(R.id.TFaddress);
+                if(address == null || address.toString() == null || address.toString().equals("") || location_tf == null) {
+                    return;
+                }
+                String location = location_tf.getText().toString();
                 System.out.println(latLng.latitude+","+latLng.longitude);
                 Log.d("LATLONG", latLng.latitude+","+latLng.longitude);
                 Intent data = new Intent();
-                data.putExtra("myData1", Double.toString(latLng.latitude));
-                data.putExtra("myData2", Double.toString(latLng.longitude));
+                data.putExtra("latitude", Double.toString(latLng.latitude));
+                data.putExtra("longitude", Double.toString(latLng.longitude));
+                data.putExtra("location", location);
+
 // Activity finished ok, return the data
                 setResult(RESULT_OK, data);
                 killActivity();
@@ -81,7 +100,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
-
 
     /**
      * Manipulates the map once available.
@@ -103,6 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return;
         mMap.setMyLocationEnabled(true);
     }
+
+
 
     public void killActivity() {
         finish();
